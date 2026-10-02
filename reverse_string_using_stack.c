@@ -1,34 +1,46 @@
 #include<stdio.h>
+#include<stdlib.h>
 #define MAX 100
-
 int top=-1;
-int stack[MAX];
+char stack[MAX];
 
-void push(char x)
+void push(char ch)
 {
-    top+=1;
-    stack[top]=x;
+	
+	if (top==MAX-1)
+		printf("...Stack Overflow...");
+	else
+	{
+		top++;
+		stack[top]=ch;
+	}
 }
 
-char pop()
+int pop()
 {
-    return stack[top--];
+	if (top==-1)
+		printf("...Stack Underflow...");
+	else
+	{
+	    char ch=stack[top];
+	    top--;
+	    return ch;
+	}
 }
 
 int main()
 {
-    char string[MAX];
-    printf("enter a string: ");
+	char string[MAX];
+	printf("Enter string: ");
     fgets(string, MAX, stdin);
-    
-        for(int i=0;string[i]!='\0';i++)
-        {
-           push(string[i]);
-        }
-    printf("reversed string is: ");
-    while(top!=-1)
-    {
-        printf(" %c",pop());
-    }
-    return 0;
+	for(int i=0;string[i]!='\0';i++)
+	{
+	    push(string[i]);
+	}
+	printf("reversed string:\n");
+	while(top!=-1)
+	{
+	    printf("%c",pop());
+	}
 }
+	
