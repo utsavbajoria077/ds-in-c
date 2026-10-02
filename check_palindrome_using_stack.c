@@ -1,46 +1,45 @@
 #include<stdio.h>
+#include<stdlib.h>
 #define MAX 100
-
 int top=-1;
 char stack[MAX];
 
-void push(char x)
+void push(char ch)
 {
-    top+=1;
-    stack[top]=x;
+	top++;
+	stack[top]=ch;
 }
 
-char pop()
+int pop()
 {
-    return stack[top--];
+    char ch=stack[top];
+    top--;
+	return ch;
 }
 
 int main()
 {
-    char string[MAX];
-    int flag=1;
-    printf("enter a string: ");
-    fgets(string, MAX, stdin);
-    
-        for(int i=0; string[i]!='\0'; i++)
-{
-    if(string[i] != '\n')
-    push(string[i]);
-}
-    for(int i = 0; string[i] != '\0'; i++)
-    {
-        if(string[i] == '\n')
-            continue;
+	char string[MAX];
+	printf("Enter string: ");
+    scanf("%s",string);
+	for(int i=0;string[i]!='\0';i++)
+	{
+	    push(string[i]);
+	}
+	int flag = 0;
 
-        if(pop() != string[i])
+    for (int i = 0; string[i] != '\0'; i++)
+    {
+        if (string[i] != pop())
         {
-            flag = 0;
+            flag = 1;
             break;
         }
     }
-if(flag==1)
-printf("palindrome");
-else
-printf("not palindrome");
-    return 0;
+
+    if (flag == 0)
+        printf("Palindrome");
+    else
+        printf("Not Palindrome");
 }
+	
